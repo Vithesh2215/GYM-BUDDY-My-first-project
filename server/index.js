@@ -13,31 +13,54 @@ const db=mysql.createConnection({
     database : "gymbuddy",
 });
 app.get('/trainerlist',(req,res)=>{
-    db.query("SELECT trainer_name FROM trainer",(err,result)=>{
+    db.query("SELECT trainer_id , trainer_name,trainer_phno FROM trainer",(err,result)=>{
         if(err) console.log(err);
         console.log(result);
-        res.send(result);
-        
+        res.send(result); 
     });
 }
 );
 app.get('/planlist',(req,res)=>{
-    db.query("SELECT plan_name FROM plan",(err,result)=>{
+    db.query("SELECT plan_id , plan_name FROM plan ",(err,result)=>{
         if(err) console.log(err);
         console.log(result);
         res.send(result);
-        
     });
 }
 );
 app.post('/userregister',(req,res)=>{
-    const username=req.body.username;
-    const password=req.body.password;
-
-    db.query("INSERT INTO adminlogin (userid,pass) VALUES (?,?)",
-    [username,password],
+    const username=req.body.userField.userReg;
+    const password=req.body.userField.userpassReg;
+    const age=req.body.userField.userageReg;
+    const phone=req.body.userField.userphoneReg;
+    const plan_id=req.body.userField.userplanidReg;
+    const trainer_id=req.body.userField.usertraineridReg;
+    const gender=req.body.userField.usergenderReg;
+    const stdate=req.body.userField.userstartdateReg;
+    const enddate=req.body.userField.userenddateReg;
+    console.log(req.body);
+    db.query("INSERT INTO users (user_name,user_age,user_phone,gender,plan_id,trainer_id,start_date,end_date,pass) VALUES (?,?,?,?,?,?,?,?,?)",
+    [username,age,phone,gender,plan_id,trainer_id,stdate,enddate,password],
     (err,result)=>{
-        if(err) console.log(err);
+        if(err) return console.log(err);
+        console.log("registered")
+    }
+    );
+});
+app.post('/trainerregister',(req,res)=>{
+    const username=req.body.trainerField.trainerReg;
+    const password=req.body.trainerField.trainerpassReg;
+    const phone=req.body.trainerField.trainerphoneReg;
+    const trainer_id=req.body.trainerField.traineruseridReg;
+    const gender=req.body.trainerField.trainergenderReg;
+    const experience=req.body.trainerField.trainerexperienceReg;
+    const rating=req.body.trainerField.trainerratingReg;
+    console.log(req.body);
+    db.query("INSERT INTO trainer (trainer_id,trainer_name,trainer_phno,experience,trainer_rating,gender,pass) VALUES (?,?,?,?,?,?,?)",
+    [trainer_id,username,phone,experience,rating,gender,password],
+    (err,result)=>{
+        if(err) return console.log(err);
+        console.log("registered")
     }
     );
 });

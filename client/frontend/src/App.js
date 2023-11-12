@@ -7,6 +7,8 @@ import UserLogin from './pages/UserLogin';
 import AdminLogin from './pages/AdminLogin';
 import TrainerLogin from './pages/TrainerLogin';
 import UserDetails from './pages/UserDetails';
+import UserRegister from './pages/UserRegister';
+import TrainerRegister from './pages/TrainerRegister';
 function App() {
   return (
     <div className="App">
@@ -17,7 +19,9 @@ function App() {
       <Route path="/adminlogin" element={<AdminLogin/>}/>
       <Route path="/trainerlogin" element={<TrainerLogin/>}/>
       <Route path="/userdetails" element={<UserDetails/>}/>
-
+      <Route path="/userregister" element={<UserRegister/>}/>
+      <Route path="/trainerregister" element={<TrainerRegister/>}/>
+      
       </Routes> 
     </BrowserRouter>
     </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import './Navbar.css';
 import {Link} from 'react-router-dom';
-import Login from '../pages/UserLogin';
+import Login from '../pages/UserRegister';
 export default function Navbar() {
 
    const [str,setStr]=React.useState('hidden');
@@ -49,7 +49,7 @@ export default function Navbar() {
             </div>
             <button className="btn" onClick={handleClick}>Login</button>
          </div>
-         <button className="btn"> SignUp</button>
+         <Link to={"/userregister"}><button className="btn"> SignUp</button></Link>
          <a href="#" class="fa fa-facebook"></a>
          <a href="#" class="fa fa-twitter"></a>
          <a href="#" class="fa fa-instagram"></a>
