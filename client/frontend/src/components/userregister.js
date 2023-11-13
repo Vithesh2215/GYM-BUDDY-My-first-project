@@ -63,26 +63,32 @@ const  Userregister=()=> {
     <div className='App'>
         <div className='registration'>
             <h1>Register</h1>
+            <br/>
             <label>Username</label>
             <input type="text" onChange={(e)=>{
                 changeuserField(e);
             }} name='userReg'/>
+            <br/>
             <label>Password</label>
             <input type="text" onChange={(e)=>{
                 changeuserField(e);
             }} name='userpassReg'/>
+            <br/>
              <label>Phone Number</label>
             <input type="text" onChange={(e)=>{
                 changeuserField(e);
             }} name='userphoneReg'/>
+            <br/>
              <label>Age</label>
             <input type="text" onChange={(e)=>{
                 changeuserField(e);
             }} name='userageReg'/>
+            <br/>
              <label>Gender</label>
             <input type="text" onChange={(e)=>{
                 changeuserField(e);
             }} name='usergenderReg'/>
+            <br/>
              <label forHtml="userplanReg">Plan</label>
              <select name="userplanReg" id="userplanReg" value={userField.userplanidReg} onChange={(e)=>{
                 changeplanId(e);
@@ -100,6 +106,7 @@ const  Userregister=()=> {
                 })
              }
              </select>
+             <br/>
             <label forHtml="">Trainer</label>
             <select name="usertrainerReg" value={userField.usertraineridReg} onChange={(e)=>{
                 changetrainerId(e);
@@ -115,14 +122,17 @@ const  Userregister=()=> {
                 })
             }
             </select>
+            <br/>
              <label>Start Date</label>
             <input type="date" onChange={(e)=>{
                 changeuserField(e);
             }} name='userstartdateReg'/>
+            <br/>
              <label>End date</label>
             <input type="date" onChange={(e)=>{
                 changeuserField(e);
             }} name='userenddateReg'/>
+            <br/>
             <button onClick={register}>Register</button>
         </div>
     </div>

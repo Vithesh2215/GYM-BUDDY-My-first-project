@@ -20,6 +20,21 @@ app.get('/trainerlist',(req,res)=>{
     });
 }
 );
+app.post('/adminlogin',(req,res)=>{
+    const username=req.body.username;
+    const password=req.body.password;
+    db.query("SELECT * FROM adminlogin WHERE user =? AND pass=?",
+    [username,password],
+    (err,result)=>{
+        console.log(result);
+        {
+        if(err) return res.send({err:err});
+        res.send(result);
+        }
+        
+    }
+    );
+});
 app.get('/planlist',(req,res)=>{
     db.query("SELECT plan_id , plan_name FROM plan ",(err,result)=>{
         if(err) console.log(err);
@@ -64,15 +79,128 @@ app.post('/trainerregister',(req,res)=>{
     }
     );
 });
+app.post('/workoutregister',(req,res)=>{
+    const planid=req.body.workoutField.planidReg;
+    const planname=req.body.workoutField.plannameReg;
+    const e1=req.body.workoutField.e1Reg;
+    const e2=req.body.workoutField.e2Reg;
+    const e3=req.body.workoutField.e3Reg;
+    console.log(req.body);
+    db.query("INSERT INTO plan (plan_id,plan_name) VALUES (?,?)",
+    [planid,planname],
+    (err,result)=>{
+        if(err) return console.log(err);
+        console.log("registered")
+    }
+    );
+    db.query("INSERT INTO exercise (plan_id,exercise_name) VALUES (?,?)",
+    [planid,e1],
+    (err,result)=>{
+        if(err) return console.log(err);
+        console.log("registered")
+    }
+    );
+    db.query("INSERT INTO exercise (plan_id,exercise_name) VALUES (?,?)",
+    [planid,e2],
+    (err,result)=>{
+        if(err) return console.log(err);
+        console.log("registered")
+    }
+    );
+    db.query("INSERT INTO exercise (plan_id,exercise_name) VALUES (?,?)",
+    [planid,e3],
+    (err,result)=>{
+        if(err) return console.log(err);
+        console.log("registered")
+    }
+    );
+
+});
 app.post('/userlogin',(req,res)=>{
     const username=req.body.username;
     const password=req.body.password;
 
-    db.query("SELECT * FROM user WHERE user_name=? AND user_password=?",
+    db.query("SELECT * FROM users WHERE user_name=? AND pass=?",
     [username,password],
     (err,result)=>{
+        console.log(result);
+        {
+        if(err) return res.send({err:err});
+        res.send(result);
+        }
+        
+    }
+    );
+});
+app.post('/trainerlogin',(req,res)=>{
+    const username=req.body.username;
+    const password=req.body.password;
+
+    db.query("SELECT * FROM trainer WHERE trainer_name=? AND pass=?",
+    [username,password],
+    (err,result)=>{
+        console.log(result);
+        {
+        if(err) return res.send({err:err});
+        res.send(result);
+        }
+        
+    }
+    );
+});
+app.get('/traindet',(req,res)=>{
+    db.query("SELECT trainer_id,trainer_name,trainer_phno,experience,trainer_rating,gender FROM trainer",(err,result)=>{
+        if(err) console.log(err);
+         res.send(result);
+    }
+    );
+});
+app.get('/userdet',(req,res)=>{
+    db.query("SELECT user_id,user_name,user_age,user_phone,gender,plan_id,trainer_id,start_date,end_date FROM users",(err,result)=>{
+        if(err) console.log(err);
+         res.send(result);
+    }
+    );
+});
+app.get('/plandet',(req, res)=>{
+    db.query("SELECT plan_id,plan_name FROM plan",(err,result)=>{
         if(err) console.log(err);
         res.send(result);
+    }
+    );
+})
+app.get('/exdet',(req, res)=>{
+    db.query("SELECT plan_name ,exercise_name FROM exercise,plan WHERE plan.plan_id=exercise.plan_id ",(err,result)=>{
+        if(err) console.log(err);
+        res.send(result);
+    }
+    );
+})
+app.post('/userdisplay',(req,res)=>{
+    const user_id=req.body.user_id;
+    db.query("SELECT user_name,user_age,user_phone,start_date,end_date,trainer_name,plan_name,exercise_name,users.gender FROM users,plan,trainer,exercise WHERE (users.plan_id=plan.plan_id) AND (users.trainer_id=trainer.trainer_id) AND(plan.plan_id=exercise.plan_id) AND (user_id=?);",
+    [user_id],
+    (err,result)=>{
+        
+        {
+        if(err) return res.send({err:err});
+        return res.json(result);
+        }
+        
+    }
+    );
+});
+app.post('/trainerdisplay',(req,res)=>{
+    const trainer_id=req.body.trainer_id;
+    db.query("SELECT user_id,user_name,user_age,user_phone,users.gender,plan_name,start_date,end_date,trainer_name,trainer_phno FROM users,trainer,plan WHERE (users.trainer_id=trainer.trainer_id) AND (users.plan_id=plan.plan_id) AND (trainer.trainer_id=?)",
+    [trainer_id],
+    (err,result)=>{
+        
+        {
+        if(err) return res.send({err:err});
+        return res.json(result);
+        }
+        
     }
     );
 });

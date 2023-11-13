@@ -1,7 +1,9 @@
 import React from 'react'
 import { useState } from 'react'
 import Axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 const Adminlogin = () => {
+    const navigate=useNavigate();
     const [username,setusername]=useState('');
     const [password,setpassword]=useState('');
 
@@ -10,12 +12,16 @@ const Adminlogin = () => {
               username:username,
               password:password,
         }).then((response)=>{
-              if(response.data.message){
-               alert(response.data.message);
-              }else{
-               alert("Login Successful!");
+               
+              console.log(response);
+              if(response.data[0].user == null){
+                  alert("Invalid username or password");
               }
-        });
+              else{
+                  navigate(`/adminpage`);
+              }
+
+        }).catch((err)=>{console.log(err)});
   }
   return (
     <div>
