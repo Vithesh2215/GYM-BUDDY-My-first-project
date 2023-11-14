@@ -7,6 +7,7 @@ import Userdet from './userdet';
 import { Link } from 'react-router-dom';
 import Plandet from './plandet';
 import Exdet from './exdet';
+import Navbar from './Navbar';
 const Adminpage = () => {
     const[traindet,settraindet]=useState(true);
     const[services,setServices]=useState(false);
@@ -66,9 +67,12 @@ const Adminpage = () => {
     
 
   return (
-    <div className='main'>
-      <div className="total">
-        <div id="mySidebar" className="sidebar">
+    <div className='main '>
+      <Navbar/>
+      <div className=" flex ">
+        
+        <div id="mySidebar" className="sidebar ">
+        
         <button onClick={changetraindet}>Trainer Details</button>
         <button onClick={changeclient}>User Details</button>
         <button onClick={changeplan}>Workout Plan Details</button>

@@ -9,7 +9,7 @@ useEffect(()=>{
     }).catch((err)=>{console.log(err)});
 },[])
   return (
-    <div className="container">
+    <div className="container w-full bg-slate-400 ml-[200px] mt-[200px]">
     <h3 className=' text-3xl font-semibold mb-4'>Customer Details</h3>
     <table className="table table-bordered">
         <thead>

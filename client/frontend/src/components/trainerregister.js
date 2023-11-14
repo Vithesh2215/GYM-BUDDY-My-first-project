@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react'
 import Axios from 'axios';
-
+import Navbar from './Navbar';
 const  Trainerregister=()=> {
    const [trainerField,settrainerField]=useState({
         trainerReg:'',

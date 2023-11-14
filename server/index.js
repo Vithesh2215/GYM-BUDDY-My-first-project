@@ -170,7 +170,7 @@ app.get('/plandet',(req, res)=>{
     );
 })
 app.get('/exdet',(req, res)=>{
-    db.query("SELECT plan_name ,exercise_name FROM exercise,plan WHERE plan.plan_id=exercise.plan_id ",(err,result)=>{
+    db.query("SELECT plan_name ,exercise_name FROM exercise,plan WHERE plan.plan_id=exercise.plan_id ORDER BY plan_name ",(err,result)=>{
         if(err) console.log(err);
         res.send(result);
     }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState ,useEffect} from 'react'
 import Axios from 'axios';
+import Navbar from './Navbar';
 
 const  Userregister=()=> {
    const [userField,setuserField]=useState({
@@ -60,80 +61,98 @@ const  Userregister=()=> {
    }
     
   return (
-    <div className='App'>
-        <div className='registration'>
-            <h1>Register</h1>
-            <br/>
-            <label>Username</label>
-            <input type="text" onChange={(e)=>{
-                changeuserField(e);
-            }} name='userReg'/>
-            <br/>
-            <label>Password</label>
-            <input type="text" onChange={(e)=>{
-                changeuserField(e);
-            }} name='userpassReg'/>
-            <br/>
-             <label>Phone Number</label>
-            <input type="text" onChange={(e)=>{
-                changeuserField(e);
-            }} name='userphoneReg'/>
-            <br/>
-             <label>Age</label>
-            <input type="text" onChange={(e)=>{
-                changeuserField(e);
-            }} name='userageReg'/>
-            <br/>
-             <label>Gender</label>
-            <input type="text" onChange={(e)=>{
-                changeuserField(e);
-            }} name='usergenderReg'/>
-            <br/>
-             <label forHtml="userplanReg">Plan</label>
-             <select name="userplanReg" id="userplanReg" value={userField.userplanidReg} onChange={(e)=>{
-                changeplanId(e);
-             }}>
-                
-                <option value="" selected>
+    <div className=' bg-cyan-500 h-screen'>
+        <Navbar/>
+        <div className=' h-[70px] '></div>
+        <div className=' flex flex-col gap-4 w-[30%] mx-auto'>
+            <h1 className=''> User Register</h1>
+            
+            <span className=' flex gap-2 justify-center'>
+                <label >Username:</label>
+                <input type="text" onChange={(e)=>{
+                    changeuserField(e);
+                }} name='userReg'/>
+            </span>
 
-                </option>
-                
+            <span className=' flex gap-2 justify-center'>
+                <label>Password:</label>
+                <input type="text" onChange={(e)=>{
+                    changeuserField(e);
+                }} name='userpassReg'/>
+            </span>
+            
+            <span className=' flex gap-2 justify-center'>
+                <label>Phone Number:</label>
+                <input type="text" onChange={(e)=>{
+                    changeuserField(e);
+                }} name='userphoneReg'/>
+            </span>
+            
+            <span className=' flex gap-2 justify-center'>
+                <label>Age:</label>
+                <input type="text" onChange={(e)=>{
+                    changeuserField(e);
+                }} name='userageReg'/>
+            </span>
+            
+            <span className=' flex gap-2 justify-center'> 
+                <label>Gender:</label>
+                <input type="text" onChange={(e)=>{
+                    changeuserField(e);
+                }} name='usergenderReg'/>
+            </span>
+            
+            <span className=' flex gap-2 justify-center'>
+                <label forHtml="userplanReg">Plan</label>
+                <select name="userplanReg" id="userplanReg" value={userField.userplanidReg} onChange={(e)=>{
+                    changeplanId(e);
+                }}>
+                    
+                    <option value="" selected></option>
+                    {
+                    planlist.map((val,k)=>{
+                        return(
+                            <option value={val.plan_id} key={val.plan_name} >{val.plan_name}</option>
+                        )
+                    })
+                }
+                </select>
+            </span>
+            
+            <span className=' flex gap-2 justify-center'>
+                <label forHtml="">Trainer</label>
+                <select name="usertrainerReg" value={userField.usertraineridReg} onChange={(e)=>{
+                    changetrainerId(e);
+                }}>
+                    <option value="" selected>
+
+                    </option>
                 {
-                planlist.map((val,k)=>{
-                    return(
-                        <option value={val.plan_id} key={val.plan_name} >{val.plan_name}</option>
-                    )
-                })
-             }
-             </select>
-             <br/>
-            <label forHtml="">Trainer</label>
-            <select name="usertrainerReg" value={userField.usertraineridReg} onChange={(e)=>{
-                changetrainerId(e);
-            }}>
-                <option value="" selected>
-
-                </option>
-            {
-                trainerlist.map((val,k)=>{
-                    return (
-                        <option value={val.trainer_id} key={k}>{val.trainer_name}  {val.trainer_phno}</option>
-                    )
-                })
-            }
-            </select>
-            <br/>
-             <label>Start Date</label>
-            <input type="date" onChange={(e)=>{
-                changeuserField(e);
-            }} name='userstartdateReg'/>
-            <br/>
-             <label>End date</label>
-            <input type="date" onChange={(e)=>{
-                changeuserField(e);
-            }} name='userenddateReg'/>
-            <br/>
-            <button onClick={register}>Register</button>
+                    trainerlist.map((val,k)=>{
+                        return (
+                            <option value={val.trainer_id} key={k}>{val.trainer_name}  {val.trainer_phno}</option>
+                        )
+                    })
+                }
+                </select>
+            </span> 
+            
+            <span className=' flex gap-2 justify-center'>
+                <label>Start Date :</label>
+                <input type="date" onChange={(e)=>{
+                    changeuserField(e);
+                }} name='userstartdateReg'/>
+            </span>
+           
+            <span className=' flex gap-2 justify-center'>
+                <label>End date :</label>
+                <input type="date" onChange={(e)=>{
+                    changeuserField(e);
+                }} name='userenddateReg'/>
+            </span>
+            <div>
+            <button onClick={register} className=" px-4 py-2 bg-green-400 hover:bg-green-500 rounded-lg">Register</button>
+            </div>
         </div>
     </div>
    );
